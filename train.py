@@ -36,8 +36,8 @@ NUM_WORKERS = 2
 PIN_MEMORY = True
 LOAD_MODEL = False
 LOAD_MODEL_FILE = "overfit.pth.tar"
-IMG_DIR = "data/images"
-LABEL_DIR = "data/labels"
+IMG_DIR = "/kaggle/input/human-dataset/images/train"
+LABEL_DIR = "/kaggle/input/human-dataset/labels/train"
 
 class Compose(object):
     def __init__(self, transforms):
@@ -80,14 +80,14 @@ def main():
         load_checkpoint(torch.load(LOAD_MODEL_FILE), model, optimizer)
 
     train_dataset = VOCDataset(
-        "data/100examples.csv",
+        "data_train.csv",
         transform=transform,
         img_dir=IMG_DIR,
         label_dir=LABEL_DIR,
     )
 
     test_dataset = VOCDataset(
-        "data/test.csv", transform=transform, img_dir=IMG_DIR, label_dir=LABEL_DIR,
+        "data_test.csv", transform=transform, img_dir=IMG_DIR, label_dir=LABEL_DIR,
     )
 
     train_loader = DataLoader(
@@ -128,7 +128,7 @@ def main():
         )
         print(f"Train mAP: {mean_avg_prec}")
 
-        if mean_avg_prec > 0.9:
+        if mean_avg_prec > 0.6:
             checkpoint = {
                 "state_dict": model.state_dict(),
                 "optimizer": optimizer.state_dict(),
