@@ -87,7 +87,7 @@ def main():
     )
 
     test_dataset = VOCDataset(
-        "data_test.csv", transform=transform, img_dir=IMG_DIR, label_dir=LABEL_DIR,
+        "data_val.csv", transform=transform, img_dir=IMG_DIR, label_dir=LABEL_DIR,
     )
 
     train_loader = DataLoader(
