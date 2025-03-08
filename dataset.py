@@ -98,5 +98,5 @@ class VOCDataset(torch.utils.data.Dataset):
 
                 # Set one hot encoding for class_label
                 label_matrix[i, j, class_label] = 1
-
+        print(f"[DEBUG] Index={index}, image.shape={image.shape}, label_matrix.shape={label_matrix.shape}")
         return image, label_matrix
