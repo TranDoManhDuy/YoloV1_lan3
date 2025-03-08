@@ -36,6 +36,15 @@ class VOCDataset(torch.utils.data.Dataset):
                 boxes.append([class_label, x, y, width, height])
 
         img_path = os.path.join(self.img_dir, self.annotations.iloc[index, 0])
+        if not os.path.exists(img_path):
+            print(f"⚠️ Lỗi: Không tìm thấy ảnh {img_path}")
+            return None  # Hoặc xử lý bỏ qua ảnh lỗi
+        
+        try:
+            image = Image.open(img_path).convert("RGB")  # Đảm bảo luôn là ảnh 3 kênh
+        except Exception as e:
+            print(f"⚠️ Lỗi khi mở ảnh {img_path}: {e}")
+            return None
         image = Image.open(img_path)
         boxes = torch.tensor(boxes)
 
