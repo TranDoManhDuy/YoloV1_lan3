@@ -249,6 +249,7 @@ def get_bboxes(
     train_idx = 0
 
     for batch_idx, (x, labels) in enumerate(loader):
+        print(x, labels)
         x = x.to(device)
         labels = labels.to(device)
 
