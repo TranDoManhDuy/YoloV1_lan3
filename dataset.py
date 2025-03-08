@@ -28,7 +28,7 @@ class VOCDataset(torch.utils.data.Dataset):
         if not os.path.exists(label_path):
             print(f"⚠️ Không tìm thấy file label: {label_path}")
             return None  # Trả về None để bỏ qua
-            boxes = []
+        boxes = []
         with open(label_path) as f:
             for label in f.readlines():
                 class_label, x, y, width, height = [
