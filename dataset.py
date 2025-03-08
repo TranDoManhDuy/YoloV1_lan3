@@ -49,6 +49,7 @@ class VOCDataset(torch.utils.data.Dataset):
             print(f"⚠️ Lỗi khi mở ảnh {img_path}: {e}")
             return None
         image = Image.open(img_path)
+        image = image.convert("RGB")
         boxes = torch.tensor(boxes)
 
         if self.transform:
